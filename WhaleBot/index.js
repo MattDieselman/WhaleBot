@@ -55,7 +55,10 @@ dispatcher.on('end', end=>{
 // create an event listener for messages
 bot.on('message', message => {
 	if(message.author.username != "WhaleBot")
-		CheckCommands(message);
+		try{
+			CheckCommands(message);
+		}
+		catch(error){console.log(error.message);}
 });
 
 

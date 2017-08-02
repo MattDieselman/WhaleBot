@@ -6,8 +6,8 @@
 		"!resume":"(function(m){if(dispatcher) dispatcher.resume(); else m.channel.send('No connection paused');})",
 		"!volume":"(function(m){if(m.content.indexOf(' ')!=-1) var sub = m.content.substring(m.content.indexOf(' ')+1,m.content.length); else  m.channel.send('Please specify variable'); var vol = parseInt(sub); if(vol) dispatcher.setVolume(vol/100); else m.channel.send('invalid volume');})",
 		"!stop":"(function(m){channel.leave();})",
-
-		"!commands":"(function(m){var coms='';for(var key in jsonCommands)coms+=(key+'\\n');if(m.author.dmChannel){m.author.dmChannel.send(coms);} else{m.author.createDM();m.author.dmChannel.send(coms);}})",
+		"!join":"(function(m){if(m.content.indexOf(' ')!=-1) var sub = m.content.substring(m.content.indexOf(' ')+1,m.content.length);else return; try{channel=bot.channels.get(sub);channel.join();}catch(error){console.log(error);}})",
+		"!commands":"(function(m){var coms='';for(var key in jsonCommands)coms+=(key+'\\n');if(m.author.dmChannel){m.author.dmChannel.send(coms);} else{m.author.createDM().then(m.author.dmChannel.send(coms));}})",
 		"!reload":"(function(m){console.log('commands reloaded'); jsonCommands = JSON.parse(fs.readFileSync('./commands.json','utf8'));})",
 		"!logout":"(function(m){m.channel.send('GoodBye');bot.destroy();})"
 }
